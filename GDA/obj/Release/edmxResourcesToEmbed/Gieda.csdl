@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="giedaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="allotee_plots">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="allottee_id" Type="Int32" Nullable="false" />
+    <Property Name="plot_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="allottee" Relationship="Self.FK_allotee_plots_allottees" FromRole="allotee_plots" ToRole="allottees" />
+    <NavigationProperty Name="plot" Relationship="Self.FK_allotee_plots_plots" FromRole="allotee_plots" ToRole="plots" />
+  </EntityType>
+  <EntityType Name="allottee_documents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="document" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="allotee_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="allottee" Relationship="Self.FK_allottee_documents_allottees" FromRole="allottee_documents" ToRole="allottees" />
+  </EntityType>
+  <EntityType Name="allottee_payments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="due_amount" Type="Int32" Nullable="false" />
+    <Property Name="due_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="allottee_id" Type="Int32" Nullable="false" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="paid_on" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="surcharge" Type="Int32" Nullable="false" />
+    <Property Name="total_amount" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="allottee" Relationship="Self.FK_allottee_payments_allottees" FromRole="allottee_payments" ToRole="allottees" />
+  </EntityType>
+  <EntityType Name="allottee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="father_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="domicile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pds_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nic" Type="Int64" Nullable="false" />
+    <Property Name="af_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="allotee_plots" Relationship="Self.FK_allotee_plots_allottees" FromRole="allottees" ToRole="allotee_plots" />
+    <NavigationProperty Name="allottee_documents" Relationship="Self.FK_allottee_documents_allottees" FromRole="allottees" ToRole="allottee_documents" />
+    <NavigationProperty Name="allottee_payments" Relationship="Self.FK_allottee_payments_allottees" FromRole="allottees" ToRole="allottee_payments" />
+    <NavigationProperty Name="installment_payments" Relationship="Self.FK_installment_payments_allottees" FromRole="allottees" ToRole="installment_payments" />
+  </EntityType>
+  <EntityType Name="data_update">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="father_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employee_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contact_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="users" Relationship="Self.FK_users_employees" FromRole="employees" ToRole="users" />
+  </EntityType>
+  <EntityType Name="installment_payments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="allottee_id" Type="Int32" Nullable="false" />
+    <Property Name="installment_id" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="due_amount" Type="Int32" Nullable="false" />
+    <Property Name="due_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="surcharge" Type="Int32" Nullable="false" />
+    <Property Name="paid_on" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="total_amount" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="allottee" Relationship="Self.FK_installment_payments_allottees" FromRole="installment_payments" ToRole="allottees" />
+  </EntityType>
+  <EntityType Name="installment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="amount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="due_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="plot_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="plot" Relationship="Self.FK_installments_plots" FromRole="installments" ToRole="plots" />
+  </EntityType>
+  <EntityType Name="other_charges">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="191" FixedLength="false" Unicode="false" />
+    <Property Name="amount" Type="Int32" />
+    <Property Name="plot_id" Type="Int32" />
+    <NavigationProperty Name="plot" Relationship="Self.FK_other_charges_plots" FromRole="other_charges" ToRole="plots" />
+  </EntityType>
+  <EntityType Name="permission">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="roles_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="Self.FK_permissions_roles" FromRole="permissions" ToRole="roles" />
+  </EntityType>
+  <EntityType Name="phase">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="plots" Relationship="Self.FK_plots_phases" FromRole="phases" ToRole="plots" />
+  </EntityType>
+  <EntityType Name="plot">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="down_payment" Type="Int32" />
+    <Property Name="form_fee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="total_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="installments" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="phase_id" Type="Int32" />
+    <NavigationProperty Name="allotee_plots" Relationship="Self.FK_allotee_plots_plots" FromRole="plots" ToRole="allotee_plots" />
+    <NavigationProperty Name="installments1" Relationship="Self.FK_installments_plots" FromRole="plots" ToRole="installments" />
+    <NavigationProperty Name="other_charges" Relationship="Self.FK_other_charges_plots" FromRole="plots" ToRole="other_charges" />
+    <NavigationProperty Name="phase" Relationship="Self.FK_plots_phases" FromRole="plots" ToRole="phases" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="permissions" Relationship="Self.FK_permissions_roles" FromRole="roles" ToRole="permissions" />
+    <NavigationProperty Name="users" Relationship="Self.FK_users_roles" FromRole="roles" ToRole="users" />
+  </EntityType>
+  <EntityType Name="surcharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="paid_on" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="due_amount" Type="Int32" Nullable="false" />
+    <Property Name="due_date" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="191" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="roles_id" Type="Int32" Nullable="false" />
+    <Property Name="emp_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_users_employees" FromRole="users" ToRole="employees" />
+    <NavigationProperty Name="role" Relationship="Self.FK_users_roles" FromRole="users" ToRole="roles" />
+  </EntityType>
+  <EntityType Name="Userss">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="roleId" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cnic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userProfileCreate" Type="DateTime" Precision="3" />
+    <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserLoginTimeLog">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="userLoginTime" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="userLoginTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="Int32" Nullable="false" />
+    <Property Name="role" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_allotee_plots_allottees">
+    <End Role="allottees" Type="Self.allottee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="allotee_plots" Type="Self.allotee_plots" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="allottees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="allotee_plots">
+        <PropertyRef Name="allottee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_allotee_plots_plots">
+    <End Role="plots" Type="Self.plot" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="allotee_plots" Type="Self.allotee_plots" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="plots">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="allotee_plots">
+        <PropertyRef Name="plot_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_allottee_documents_allottees">
+    <End Role="allottees" Type="Self.allottee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="allottee_documents" Type="Self.allottee_documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="allottees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="allottee_documents">
+        <PropertyRef Name="allotee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_allottee_payments_allottees">
+    <End Role="allottees" Type="Self.allottee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="allottee_payments" Type="Self.allottee_payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="allottees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="allottee_payments">
+        <PropertyRef Name="allottee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_installment_payments_allottees">
+    <End Role="allottees" Type="Self.allottee" Multiplicity="1" />
+    <End Role="installment_payments" Type="Self.installment_payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="allottees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="installment_payments">
+        <PropertyRef Name="allottee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_employees">
+    <End Role="employees" Type="Self.employee" Multiplicity="1" />
+    <End Role="users" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_installments_plots">
+    <End Role="plots" Type="Self.plot" Multiplicity="1" />
+    <End Role="installments" Type="Self.installment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="plots">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="installments">
+        <PropertyRef Name="plot_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_other_charges_plots">
+    <End Role="plots" Type="Self.plot" Multiplicity="0..1" />
+    <End Role="other_charges" Type="Self.other_charges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="plots">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="other_charges">
+        <PropertyRef Name="plot_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_permissions_roles">
+    <End Role="roles" Type="Self.role" Multiplicity="1" />
+    <End Role="permissions" Type="Self.permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="permissions">
+        <PropertyRef Name="roles_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_plots_phases">
+    <End Role="phases" Type="Self.phase" Multiplicity="0..1" />
+    <End Role="plots" Type="Self.plot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="phases">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="plots">
+        <PropertyRef Name="phase_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_users_roles">
+    <End Role="roles" Type="Self.role" Multiplicity="1" />
+    <End Role="users" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="roles_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="giedaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="allotee_plots" EntityType="Self.allotee_plots" />
+    <EntitySet Name="allottee_documents" EntityType="Self.allottee_documents" />
+    <EntitySet Name="allottee_payments" EntityType="Self.allottee_payments" />
+    <EntitySet Name="allottees" EntityType="Self.allottee" />
+    <EntitySet Name="data_update" EntityType="Self.data_update" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="installment_payments" EntityType="Self.installment_payments" />
+    <EntitySet Name="installments" EntityType="Self.installment" />
+    <EntitySet Name="other_charges" EntityType="Self.other_charges" />
+    <EntitySet Name="permissions" EntityType="Self.permission" />
+    <EntitySet Name="phases" EntityType="Self.phase" />
+    <EntitySet Name="plots" EntityType="Self.plot" />
+    <EntitySet Name="roles" EntityType="Self.role" />
+    <EntitySet Name="surcharges" EntityType="Self.surcharge" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="Usersses" EntityType="Self.Userss" />
+    <EntitySet Name="UserLoginTimeLogs" EntityType="Self.UserLoginTimeLog" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <AssociationSet Name="FK_allotee_plots_allottees" Association="Self.FK_allotee_plots_allottees">
+      <End Role="allottees" EntitySet="allottees" />
+      <End Role="allotee_plots" EntitySet="allotee_plots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_allotee_plots_plots" Association="Self.FK_allotee_plots_plots">
+      <End Role="plots" EntitySet="plots" />
+      <End Role="allotee_plots" EntitySet="allotee_plots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_allottee_documents_allottees" Association="Self.FK_allottee_documents_allottees">
+      <End Role="allottees" EntitySet="allottees" />
+      <End Role="allottee_documents" EntitySet="allottee_documents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_allottee_payments_allottees" Association="Self.FK_allottee_payments_allottees">
+      <End Role="allottees" EntitySet="allottees" />
+      <End Role="allottee_payments" EntitySet="allottee_payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_installment_payments_allottees" Association="Self.FK_installment_payments_allottees">
+      <End Role="allottees" EntitySet="allottees" />
+      <End Role="installment_payments" EntitySet="installment_payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_employees" Association="Self.FK_users_employees">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_installments_plots" Association="Self.FK_installments_plots">
+      <End Role="plots" EntitySet="plots" />
+      <End Role="installments" EntitySet="installments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_other_charges_plots" Association="Self.FK_other_charges_plots">
+      <End Role="plots" EntitySet="plots" />
+      <End Role="other_charges" EntitySet="other_charges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_permissions_roles" Association="Self.FK_permissions_roles">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="permissions" EntitySet="permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_plots_phases" Association="Self.FK_plots_phases">
+      <End Role="phases" EntitySet="phases" />
+      <End Role="plots" EntitySet="plots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
